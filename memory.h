@@ -5,11 +5,12 @@
 #include "pa2structs.h"
 #include <stdio.h>
 
-listNode * makeTree(FILE * Input);
+treeNode* popStack(StackNode** stack);
+StackNode* pushStack(StackNode* stack, treeNode* Node);
 
-listNode * makeListNode();
+treeNode * makeLeafNode(int label, int * x, int * y, int size);
+treeNode * makeInternalNode(int label, treeNode * right, treeNode * left);
 
-void deleteList(listNode * node);
 void deleteTree(treeNode * node);
 
 #endif

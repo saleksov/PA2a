@@ -3,24 +3,17 @@
 
 #include <stdio.h>
 
-#define H -6;
-#define V -7;
+#define H -6
+#define V -7
 
 // main node for my boxes
-
-typedef struct listNode {
-    
-    int x;
-    int y;
-
-    struct llistNode * next;
-
-} listNode;
 
 typedef struct treeNode {
     int label; // if > 0 real box, if < 0 cut
     
-    listNode * xy; // List of dimentions x and y
+    int * x;
+    int * y;
+    int size;
 
     struct treeNode * left;
     struct treeNode * right;

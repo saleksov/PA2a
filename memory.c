@@ -1,61 +1,48 @@
 #include "memory.h"
 
-static treeNode* popStack(StackNode** stack);
-static StackNode* pushStack(StackNode* stack, treeNode* Node);
-
-listNode * makeTree(FILE * Input)
+treeNode * makeInternalNode(int label, treeNode * right, treeNode * left)
 {
-    StackNode * stack = NULL;
-    treeNode * node = NULL;
-    char line;
-    int label;
-    int x;
-    int y;
+    treeNode * node = (treeNode*)malloc(sizeof(treeNode));
+    if (!node) exit(EXIT_FAILURE);
 
-    while(fgets(line, sizeof(line), Input)){
-        if (leaf)
-        {
-            node = (treeNode *)malloc(sizeof(treeNode));
-            node -> left = NULL;
-            node -> right = NULL;
-            node -> label = label;
+    node -> label = label;
+    node -> size = 0;
 
-            node -> xy = makeListNode(x,y,NULL);
-            // WHAT IF THERE ARE MULTIPLE x and Ys?
-        }
-        else if (internal)
-        {
-            node = (treeNode *)malloc(sizeof(treeNode));
-            node -> right = popStack(&stack);
-            node -> left  = popStack(&stack);
+    node -> left = left;
+    node -> right = right;
 
-            if (!node->left || !node->right) 
-                exit(EXIT_FAILURE);
+    node -> x = NULL;
+    node -> y = NULL;
 
-            if (V???) node -> label = V;
-            if (H???) node -> label = H;
+    return node;
+}
 
-            node -> xy = NULL;
+treeNode * makeLeafNode(int label, int * x, int * y, int size)
+{
+    treeNode * node = (treeNode*)malloc(sizeof(treeNode));
+    if (!node) exit(EXIT_FAILURE);
 
-            stack = pushStack(stack, node);
-        }
-        else
-        {
-            exit(EXIT_FAILURE);
-        }
-    }
+    node -> label = label;
+    node -> size = size;
 
-    node = popStack(&stack);
+    node -> left = NULL;
+    node -> right = NULL;
 
-    if (stack != NULL)
+    node -> x = (int*)malloc(size * sizeof(int));
+    node -> y = (int*)malloc(size * sizeof(int));
+
+    if (!node -> x || !node -> y) exit(EXIT_FAILURE);
+
+    for (int i = 0; i < size; i++)
     {
-        exit(EXIT_FAILURE);  
+        node -> x[i] = x[i];
+        node -> y[i] = y[i];
     }
 
     return node;
 }
 
-static StackNode* pushStack(StackNode* stack, treeNode* Node)
+StackNode* pushStack(StackNode* stack, treeNode* Node)
 {
     StackNode* stackNode = (StackNode*)malloc(sizeof(StackNode));
     if(!stackNode) exit(EXIT_FAILURE);
@@ -66,7 +53,7 @@ static StackNode* pushStack(StackNode* stack, treeNode* Node)
     return stackNode;
 }
 
-static treeNode* popStack(StackNode** stack)
+treeNode* popStack(StackNode** stack)
 {
     if (!stack || !(*stack)) return NULL;
 
@@ -80,29 +67,16 @@ static treeNode* popStack(StackNode** stack)
     return Node;
 }
 
-listNode * makeListNode(int x, int y, listNode * next)
-{
-    listNode * node = (listNode*)malloc(sizeof(listNode));
-    node -> next = next;
-    node -> x = x;
-    node -> y = y;
-    return node;
-}
-
-void deleteList(listNode * node)
-{
-    if (node)
-    {
-        deleteList(node -> next);
-        free(node);
-    }
-}
 
 void deleteTree(treeNode * node)
 {
     if (node)
     {
-        deleteList(node -> xy);
+        if(node -> x)
+            free(node -> x);
+        if(node -> y)
+            free(node -> y);
+
         deleteTree(node -> left);
         deleteTree(node -> right);
         free(node);
