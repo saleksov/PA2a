@@ -1,15 +1,12 @@
 #include "memory.h"
 
-treeNode * makeInternalNode(int label, treeNode * right, treeNode * left)
+treeNode * makeInternalNode(int label)
 {
     treeNode * node = (treeNode*)malloc(sizeof(treeNode));
     if (!node) exit(EXIT_FAILURE);
 
     node -> label = label;
     node -> size = 0;
-
-    node -> left = left;
-    node -> right = right;
 
     node -> x = NULL;
     node -> y = NULL;

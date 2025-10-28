@@ -21,19 +21,22 @@ treeNode * readInputFile(int argc, char *argv[])
 
     char c;
     int label;
-    while ((c = fgetc(inputFile1) != EOF))
+    while (((c = fgetc(inputFile1)) != EOF))
     {
         if (c > 65) // is a character
         {
-
             if (c == 'H')
                 label = H;
             else
                 label = V;
 
-            temp = makeInternalNode(label, popStack(&stack), popStack(&stack));
+            temp = makeInternalNode(label);
+            temp -> right = popStack(&stack);
+            temp -> left = popStack(&stack);
 
             stack = pushStack(stack, temp);
+
+            while ((c = fgetc(inputFile1)) != '\n' && c != EOF);
         }
         else
         {
@@ -55,6 +58,7 @@ treeNode * readInputFile(int argc, char *argv[])
     }
 
     temp = popStack(&stack);
+    
     if (stack != NULL)
     {
         exit(EXIT_FAILURE);

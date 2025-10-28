@@ -15,7 +15,7 @@ pa2: $(OBJS)
 	$(GCC) $(TESTFLAGS) -c $*.c
 
 testmemory: pa2
-	$(VAL) --leak-check=full --show-leak-kinds=all ./pa2 5e-10 examples/inv.param examples/wire.param examples/s1423.txt a.txt b 3.txt 4.txt
+	$(VAL) --leak-check=full --show-leak-kinds=all ./pa2 examples/500_5.txt a.txt b.txt c.txt
 
 testall: test0
 

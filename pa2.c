@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include "pa2structs.h"
-#include "memory.c"
-#include "fileman.c"
+#include "memory.h"
+#include "fileman.h"
 
 int main (int argc, char *argv[])
 {
