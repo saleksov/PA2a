@@ -21,9 +21,9 @@ testall: test0
 
 # Test all given expected files
 test0: pa2
-	./pa2 examples/500_5.txt a.txt b.txt c.txt
+	./pa2 examples/8.txt 1.txt 2.txt c.txt
 #diff -w a.txt examples/5.pre
 #cmp -l b examples/5.elmore
 	
 clean: # remove all machine generated files
-	rm -f pa2 *.o output? *~ memcheck.txt *.b a.txt b
+	rm -f pa2 *.o output? *~ memcheck.txt *.b *.txt b

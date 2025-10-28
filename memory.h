@@ -9,7 +9,7 @@ treeNode* popStack(StackNode** stack);
 StackNode* pushStack(StackNode* stack, treeNode* Node);
 
 treeNode * makeLeafNode(int label, int * x, int * y, int size);
-treeNode * makeInternalNode(int label);
+treeNode * makeInternalNode();
 
 void deleteTree(treeNode * node);
 

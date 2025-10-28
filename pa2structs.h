@@ -15,6 +15,9 @@ typedef struct treeNode {
     int * y;
     int size;
 
+    int xCord;
+    int yCord;
+
     struct treeNode * left;
     struct treeNode * right;
 } treeNode;

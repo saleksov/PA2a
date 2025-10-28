@@ -8,8 +8,8 @@
 
 treeNode * readInputFile(int argc, char *argv[]);
 
-//void makeOutFile1(treeNode* root, char *argv[]);
-//void makeOutFile2(treeNode* root, char *argv[]);
+void makeOutFile1(treeNode* root, char *argv[]);
+void makeOutFile2(treeNode* root, char *argv[]);
 //void makeOutFile3(treeNode* root, char *argv[]);
 
 #endif
