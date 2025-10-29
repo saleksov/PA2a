@@ -128,18 +128,14 @@ static void processInternalNode(treeNode *node)
         }
 
         if (j == m)
-        {
             j--;
-        }
 
         if (j < 0)
-        {
-            j=0; // Go back one step
-        }
+            j=0; 
 
         for (i = 0; i < n; i++)
         {
-            if (j >= m)
+            if (j >= m) // I dont think this does anything, but im going to keep it.
                 break;
 
             // Look Left Once
@@ -152,20 +148,12 @@ static void processInternalNode(treeNode *node)
             }
 
             // Either increase j or continue
-            if (i == n - 1) // We are the last i
-            {
-                Threshold = __INT_MAX__;
-            }
-            else // We are not the last i
-            {
-                Threshold = leftX[i + 1];
-            }
+            // Are we the last i ?
+            Threshold = (i == n - 1) ? __INT_MAX__ : leftX[i + 1];
 
             while (rightX[j] < Threshold)
             {
-                
-                    
-                if (rightX[j] > leftX[i]) // While we are smaller than threshhold, bigger than previous, so we are in between
+                if (rightX[j] > leftX[i]) // Are we in between
                 {
                     node->x[nm] = rightX[j];
                     node->y[nm] = rightY[j] + leftY[i];
@@ -174,7 +162,7 @@ static void processInternalNode(treeNode *node)
 
                 j++;
 
-                if (j >= m)
+                if (j == m)
                 {
                     j--;
                     break;
@@ -199,5 +187,12 @@ static void processInternalNode(treeNode *node)
         node -> y[1] = 20;
         node -> x[2] = 100;
         node -> y[2] = 100;
+
+        // cannot start with j = n -1 because then I would have to reverse my list at the end
+        // big with j = 0
+        // For all j with height > yi[0] generate combinations
+        // for all i, generate 0-k combinations left
+        // generate 1 combination to the right.
+        // go to next node, repeat.
     }  
 }
