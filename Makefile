@@ -5,7 +5,7 @@ VAL = valgrind --tool=memcheck --log-file=memcheck.txt --leak-check=full --verbo
 
 TESTFLAGS = -DTEST_MAIN 
 
-SRCS = pa2.c memory.c fileman.c
+SRCS = pa2.c memory.c fileman.c DPfunc.c
 OBJS = $(SRCS:%.c=%.o)
 
 pa2: $(OBJS)
@@ -15,13 +15,13 @@ pa2: $(OBJS)
 	$(GCC) $(TESTFLAGS) -c $*.c
 
 testmemory: pa2
-	$(VAL) --leak-check=full --show-leak-kinds=all ./pa2 examples/500_5.txt a.txt b.txt c.txt
+	$(VAL) --leak-check=full --show-leak-kinds=all ./pa2 examples/Me.txt a.txt b.txt c.txt
 
 testall: test0
 
 # Test all given expected files
 test0: pa2
-	./pa2 examples/8.txt 1.txt 2.txt c.txt
+	./pa2 examples/3.txt 1.txt 2.txt c.txt
 #diff -w a.txt examples/5.pre
 #cmp -l b examples/5.elmore
 	

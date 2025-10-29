@@ -39,11 +39,16 @@ treeNode * readInputFile(int argc, char *argv[])
                 temp->x[0] = (temp->left->x[0] > temp->right->x[0]) ? temp->left->x[0] : temp->right->x[0];
                 temp->y[0] = temp->left->y[0] + temp->right->y[0];
             }
-            else
+            else if (c == 'V')
             {
                 temp -> label = V;
                 temp->x[0] = temp->left->x[0] + temp->right->x[0];
                 temp->y[0] = (temp->left->y[0] > temp->right->y[0]) ? temp->left->y[0] : temp->right->y[0];
+            }
+            else
+            {
+                // Why are we here?
+                exit(EXIT_FAILURE); // INVALID CHARACTER
             }
 
             stack = pushStack(stack, temp);

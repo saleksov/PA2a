@@ -1,6 +1,9 @@
 {
     "files.associations": {
         "stdio.h": "c",
-        "pa2structs.h": "c"
+        "pa2structs.h": "c",
+        "array": "c",
+        "string_view": "c",
+        "initializer_list": "c"
     }
 }

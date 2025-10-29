@@ -11,8 +11,8 @@
 typedef struct treeNode {
     int label; // if > 0 real box, if < 0 cut
     
-    int * x;
-    int * y;
+    int * x; // x is width of the possible configurations
+    int * y; // y is height
     int size;
 
     int xCord;
