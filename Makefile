@@ -1,6 +1,6 @@
 WARNING = -Wall -Wshadow --pedantic
 ERROR = -Wvla #-Werror
-GCC = gcc -std=c99 -g $(WARNING) $(ERROR)
+GCC = gcc -std=c99 -O3 $(WARNING) $(ERROR)
 VAL = valgrind --tool=memcheck --log-file=memcheck.txt --leak-check=full --verbose
 
 TESTFLAGS = -DTEST_MAIN 
@@ -21,8 +21,8 @@ testall: test0
 
 # Test all given expected files
 test0: pa2
-	./pa2 examples/3.txt 1.txt 2.txt c.txt
-#diff -w a.txt examples/5.pre
+	./pa2 examples/500_5.txt a.txt b.txt c.txt d.txt
+#diff -w d.txt examples/8_all.pck
 #cmp -l b examples/5.elmore
 	
 clean: # remove all machine generated files

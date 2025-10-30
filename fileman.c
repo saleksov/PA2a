@@ -57,7 +57,10 @@ treeNode * readInputFile(int argc, char *argv[])
         else
         {
             ungetc(c, inputFile1);
-            fscanf(inputFile1, "%d", &label);
+
+            if(fscanf(inputFile1, "%d", &label) != 1)
+                exit(EXIT_FAILURE); 
+                         
             fgetc(inputFile1); // Get rid of leading '('
 
             while(fscanf(inputFile1, "(%d,%d)", &x[maxSize], &y[maxSize]) == 2)
