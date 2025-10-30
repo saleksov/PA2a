@@ -221,7 +221,11 @@ static void processInternalNode(treeNode *node)
                     break;
                 }
 
-                if (rightX[j] >= Threshold)
+                if (rightX[j] == Threshold)
+                {
+                    break;
+                }
+                else if ((rightX[j] > Threshold))
                 {
                     j--;
                     break;
