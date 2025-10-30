@@ -4,6 +4,47 @@
 
 static void processLeafNodes(treeNode *node);
 static void processInternalNode(treeNode *node);
+static void treverseAndSetOptimal(treeNode * node, int Idx);
+
+void FindOptimalComb(treeNode * node)
+{
+    if (!node) return;
+
+    int n = node -> size;
+    if (n == 0) return;
+
+    int MinArea = node -> x[0] * node -> y[0];
+    int MinIdx = 0;
+    int tempArea;
+
+    for (int i = 1; i<n; i++)
+    {
+        tempArea = node -> x[i] * node -> y[i];
+        if (tempArea < MinArea)
+        {
+            MinArea = tempArea;
+            MinIdx = i;
+        }
+    }
+
+    node -> x[0] = node -> x[MinIdx];
+    node -> y[0] = node -> y[MinIdx];
+    
+    treverseAndSetOptimal(node->left, node->chosenLeft[MinIdx]);
+    treverseAndSetOptimal(node->right, node->chosenRight[MinIdx]);
+}
+
+static void treverseAndSetOptimal(treeNode * node, int Idx)
+{
+    node -> x[0] = node -> x[Idx];
+    node -> y[0] = node -> y[Idx];
+
+    if (node -> label < 0)
+    {
+        treverseAndSetOptimal(node->left, node->chosenLeft[Idx]);
+        treverseAndSetOptimal(node->right, node->chosenRight[Idx]); 
+    }
+}
 
 void DP(treeNode *node)
 {
@@ -101,6 +142,9 @@ static void processInternalNode(treeNode *node)
     node->x = (int *)malloc(nm * sizeof(int));
     node->y = (int *)malloc(nm * sizeof(int));
 
+    node->chosenLeft = (int *)malloc(nm * sizeof(int));
+    node->chosenRight = (int *)malloc(nm * sizeof(int));
+
     nm = 0;
 
     int *leftX = node->left->x;
@@ -110,10 +154,11 @@ static void processInternalNode(treeNode *node)
 
     int Threshold;
 
+    j = 0;
+
     if (node->label == H)
     {
-        j = 0;
-
+        
         while (j < m) // Skip leading Xs
         {
             if (rightX[j] <= leftX[0])
@@ -144,6 +189,10 @@ static void processInternalNode(treeNode *node)
                 // Make Pair, we know i is max width
                 node->x[nm] = leftX[i];
                 node->y[nm] = leftY[i] + rightY[j];
+
+                node -> chosenLeft[nm] = i;
+                node -> chosenRight[nm] = j;
+
                 nm++;
             }
 
@@ -157,6 +206,10 @@ static void processInternalNode(treeNode *node)
                 {
                     node->x[nm] = rightX[j];
                     node->y[nm] = rightY[j] + leftY[i];
+
+                    node -> chosenLeft[nm] = i;
+                    node -> chosenRight[nm] = j;
+
                     nm++;
                 }
 
@@ -174,25 +227,56 @@ static void processInternalNode(treeNode *node)
                     break;
                 }    
             }
-        }
-        node -> size = nm;
+        }   
     }
     else if (node->label == V)
     {
-        // Do nothing yet
-        node -> size = 3;
-        node -> x[0] = 10;
-        node -> y[0] = 10;
-        node -> x[1] = 20;
-        node -> y[1] = 20;
-        node -> x[2] = 100;
-        node -> y[2] = 100;
+        
+        // Get rid of trailing Xs
+        j = m - 1;
 
-        // cannot start with j = n -1 because then I would have to reverse my list at the end
-        // big with j = 0
-        // For all j with height > yi[0] generate combinations
-        // for all i, generate 0-k combinations left
-        // generate 1 combination to the right.
-        // go to next node, repeat.
+        Threshold = leftY[n - 1];
+        while(j > 0 && rightY[j - 1] <= Threshold)
+        {
+            j--;
+        }
+
+        m = j + 1;
+        j = 0;
+
+        // At this point Xs that would have never made pairs are removed
+        // Now i need to look left and make a pair with every j left, then make 1 pair looking right
+
+        for (i = 0; i < n; i ++)
+        {
+            if (j >= m) break; // just in case
+
+            // while J is height determining make connections
+            while(j < m && rightY[j] > leftY[i])
+            {
+                node -> x[nm] = leftX[i] + rightX[j];
+                node -> y[nm] = rightY[j];
+
+                node -> chosenLeft[nm] = i;
+                node -> chosenRight[nm] = j;
+
+                nm++;
+                j++;
+            }
+
+            // i is height determining
+            
+            if (j < m && rightY[j] <= leftY[i])
+            {
+                node -> x[nm] = leftX[i] + rightX[j];
+                node -> y[nm] = leftY[i];
+
+                node -> chosenLeft[nm] = i;
+                node -> chosenRight[nm] = j;
+
+                nm++;
+            }
+        }
     }  
+    node -> size = nm;
 }

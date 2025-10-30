@@ -7,5 +7,6 @@
 #include "memory.h"
 
 void DP(treeNode * node);
+void FindOptimalComb(treeNode * node);
 
 #endif

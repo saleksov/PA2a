@@ -10,6 +10,9 @@ treeNode * makeInternalNode()
     node -> xCord = 0;
     node -> yCord = 0;
 
+    node -> chosenLeft = NULL; // probably dont need.
+    node -> chosenRight = NULL;
+
     node -> x = (int*)malloc(sizeof(int));
     node -> y = (int*)malloc(sizeof(int));
 
@@ -26,6 +29,9 @@ treeNode * makeLeafNode(int label, int * x, int * y, int size)
 
     node -> left = NULL;
     node -> right = NULL;
+
+    node -> chosenLeft = NULL;
+    node -> chosenRight = NULL;
 
     node -> xCord = 0;
     node -> yCord = 0;
@@ -78,6 +84,10 @@ void deleteTree(treeNode * node)
             free(node -> x);
         if(node -> y)
             free(node -> y);
+        if(node -> chosenLeft)
+            free(node -> chosenLeft);
+        if(node -> chosenRight)
+            free(node->chosenRight);
 
         deleteTree(node -> left);
         deleteTree(node -> right);

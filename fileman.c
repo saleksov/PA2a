@@ -5,7 +5,7 @@ static void writeOutFile2(treeNode* node, FILE* outputFile2);
 
 treeNode * readInputFile(int argc, char *argv[])
 {
-    if (argc != 5)
+    if (argc != 6)
         exit(EXIT_FAILURE); // Invalid input
     
     FILE *inputFile1 = fopen(argv[1], "r");
@@ -87,9 +87,9 @@ treeNode * readInputFile(int argc, char *argv[])
 
 // 1 and 2 related code are from my 368 PA2
 
-void makeOutFile1(treeNode* root, char *argv[])
+void makeOutFile1(treeNode* root, char *argv[], int i)
 {
-    FILE *outputFile1 = fopen(argv[2], "w");
+    FILE *outputFile1 = fopen(argv[i], "w");
 
     if (outputFile1 == NULL)
     {
@@ -101,9 +101,9 @@ void makeOutFile1(treeNode* root, char *argv[])
     fclose(outputFile1);
 }
 
-void makeOutFile2(treeNode* root, char *argv[])
+void makeOutFile2(treeNode* root, char *argv[], int i)
 {
-    FILE *outputFile2 = fopen(argv[3], "w");
+    FILE *outputFile2 = fopen(argv[i], "w");
 
     if (outputFile2 == NULL)
     {
