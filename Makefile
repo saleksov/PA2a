@@ -21,8 +21,8 @@ testall: test0
 
 # Test all given expected files
 test0: pa2
-	./pa2 examples/500_5.txt a.txt b.txt c.txt d.txt
-#diff -w d.txt examples/8_all.pck
+	./pa2 examples/500_5.txt 1.txt 2.txt 3.txt 4.txt
+	diff -w 4.txt pa2_outputs/500_leafs/out_file4
 #cmp -l b examples/5.elmore
 	
 clean: # remove all machine generated files
