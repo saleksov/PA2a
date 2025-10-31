@@ -30,17 +30,18 @@ test8: pa2
 
 test10: pa2
 	./pa2 examples/10_1.txt 1.txt 2.txt 3.txt 4.txt
+	diff -w 3.txt pa2_outputs/10_leafs/out_file3
 	diff -w 4.txt pa2_outputs/10_leafs/out_file4
 
 test100: pa2
 	./pa2 examples/100_3.txt 1.txt 2.txt 3.txt 4.txt
 	diff -w 3.txt pa2_outputs/100_leafs/out_file3
-#	diff -w 4.txt pa2_outputs/100_leafs/out_file4
+	diff -w 4.txt pa2_outputs/100_leafs/out_file4
 
 test500: pa2
 	./pa2 examples/500_5.txt 1.txt 2.txt 3.txt 4.txt
 	diff -w 3.txt pa2_outputs/500_leafs/out_file3
-#	diff -w 4.txt pa2_outputs/500_leafs/out_file4
+	diff -w 4.txt pa2_outputs/500_leafs/out_file4
 	
 clean: # remove all machine generated files
 	rm -f pa2 *.o output? *~ memcheck.txt *.b *.txt b

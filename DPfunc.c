@@ -279,6 +279,10 @@ static void processInternalNode(treeNode *node)
                 node -> chosenRight[nm] = j;
 
                 nm++;
+                if (rightY[j] == leftY[i])
+                {
+                    j++;
+                }
             }
         }
     }  

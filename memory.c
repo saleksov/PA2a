@@ -7,8 +7,8 @@ treeNode * makeInternalNode()
 
     node -> size = 1;
 
-    node -> xCord = 0;
-    node -> yCord = 0;
+    // node -> xCord = 0;
+    // node -> yCord = 0;
 
     node -> chosenLeft = NULL; // probably dont need.
     node -> chosenRight = NULL;
@@ -33,8 +33,8 @@ treeNode * makeLeafNode(int label, int * x, int * y, int size)
     node -> chosenLeft = NULL;
     node -> chosenRight = NULL;
 
-    node -> xCord = 0;
-    node -> yCord = 0;
+    // node -> xCord = 0;
+    // node -> yCord = 0;
 
     node -> x = (int*)malloc(size * sizeof(int));
     node -> y = (int*)malloc(size * sizeof(int));

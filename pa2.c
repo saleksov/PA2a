@@ -8,6 +8,12 @@ int main (int argc, char *argv[])
 {
     treeNode* root = readInputFile(argc, argv);
     
+    if (root)
+    {
+        root -> xCord = 0;
+        root -> yCord = 0;
+    }
+
     makeOutFile1(root, argv, 2);
 
     makeOutFile2(root, argv, 3);
