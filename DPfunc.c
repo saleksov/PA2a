@@ -137,7 +137,7 @@ static void processInternalNode(treeNode *node)
     int n = node->left->size;
     int m = node->right->size;
 
-    int nm = n + m;
+    int nm = n + m - 1;
 
     node->x = (int *)malloc(nm * sizeof(int));
     node->y = (int *)malloc(nm * sizeof(int));
